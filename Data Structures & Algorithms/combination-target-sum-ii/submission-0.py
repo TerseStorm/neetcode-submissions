@@ -1,0 +1,19 @@
+class Solution:
+    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+                combinations = []
+                nnums = candidates[::-1]
+                def getCombinations(nums, total, target):
+                    if sum(total) > target:
+                        return
+                    if sum(total) == target:
+                        combinations.append(total)
+                        return
+                    i = 0
+                    while len(nums) > 0:
+                        num = nums[-1]
+                        getCombinations(nums[:-1], total + [num] , target)
+                        nums = [n for n in nums if n != num]
+
+                
+                getCombinations(nnums, [], target)
+                return combinations
