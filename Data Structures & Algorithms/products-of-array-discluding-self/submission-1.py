@@ -1,0 +1,16 @@
+import functools
+
+class Solution:
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
+        # To the left, to the left
+        # Tells us the product of all the numbers to the left of nums[i]
+        prefixProd = [1] * len(nums)
+        for i in range(1, len(nums)):
+            prefixProd[i] = prefixProd[i-1] * nums[i-1]
+        # BAZZARAGHT
+        # Tells us the product of all the numbers to the right of nums[i]
+        suffixProd = [1] * len(nums)
+        for i in reversed(range(0, len(nums)-1)):
+            suffixProd[i] = suffixProd[i+1] * nums[i+1]
+        return [prefixProd[i] * suffixProd[i] for i in range(len(nums))]
+        
